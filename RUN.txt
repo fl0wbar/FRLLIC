@@ -1,0 +1,42 @@
+# Commands for Training, Testing of Models & Compression and Decompression of images using FRLLIC(L3C)
+
+//////  Training on CLIC dataset
+
+>> Preparing CLIC for Training
+
+    ./prep_clic.sh ./data
+
+>> TRAINING commands
+
+    python train.py configs/ms/cr.cf configs/dl/clic.cf FRLLIC_logdir
+
+    --- Extra arguments can be passed using -p (global_config.py)
+
+    python train.py configs/ms/cr.cf configs/dl/clic.cf FRLLIC_logdir -p upsampling=deconv
+
+    --- For using pretrained model / restoring training
+
+    python train.py configs/ms/cr.cf configs/dl/clic.cf FRLLIC_logdir --restore 0502_1213 --restore_restart
+
+
+>> TESTING commands
+
+    python test.py FRLLIC_logdir 0502_1213 data/CLIC/test
+
+    python test.py FRLLIC_logdir 0502_1213 data/CLIC/test
+
+>> SAMPLING commands
+
+    python test.py FRLLIC_logdir 0524_0001 data/CLIC/test --sample=samples
+
+>> ENCODING (COMPRESSION) commands
+
+    --- Encode to out.l3c
+    python l3c.py FRLLIC_logdir 0524_0001 enc /path/to/img out.l3c
+
+    python l3c.py FRLLIC_logdir 0624_2025 enc ./fixedimg256.png out.l3c
+
+    --- Decode from out.l3c, save to decoded.png
+    python l3c.py FRLLIC_logdir 0524_0001 dec out.l3c decoded.png
+
+    python l3c.py FRLLIC_logdir 0624_2025 dec out.l3c decoded.png

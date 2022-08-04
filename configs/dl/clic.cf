@@ -1,0 +1,13 @@
+batchsize_train = 4
+batchsize_val = 8
+crop_size = 128
+
+max_epochs = None
+
+image_cache_pkl = 'data/cache.pkl'
+train_imgs_glob = 'data/train_CLIC_FRLLIC'
+val_glob = 'data/validation_CLIC_FRLLIC'
+
+val_glob_min_size = None  # for cache_p
+num_val_batches = 4
+
